@@ -17,6 +17,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lpo.seoulnavi.controller.SearchParkInfo;
+import com.lpo.seoulnavi.net.response.ParkInfoRes;
 
 public class MapMainActivity extends AppCompatActivity implements OnMapReadyCallback{
 
@@ -24,7 +26,8 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
     private LocationManager mLocationManager;
     private FloatingActionButton mFab;
     private GoogleMap mGMap;
-
+    private ParkInfoRes searchParkInfo = new ParkInfoRes();
+    private  ParkInfoRes mParkInfoRes = new ParkInfoRes();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,5 +83,16 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         markerOptions.title("서울");
         markerOptions.snippet("한국의 수도");
         mGMap.addMarker(markerOptions);
+        Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>");
+        testSync();
+        Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>2");
+
+    }//onMapReady end
+
+    void testSync() {
+        Log.d(TAG, "sync 맞냐??<<<>>>>>");
+        mParkInfoRes = SearchParkInfo.searchParkInfo();
+        //Log.d(TAG,">>>>.>"+mParkInfoRes.searchParkInfo.row.get(1).pPark);
+        Log.d(TAG, "sync 맞냐??<<<>>>>>end");
     }
 }
