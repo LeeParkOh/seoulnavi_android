@@ -16,15 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by parkjongkook on 2017. 8. 7..
  */
-
 public class SearchParkInfo {
+
     private static final String TAG = "SearchParkInfo";
-    public static ParkInfoRes mParkInfoRes;
-    ApiUtil apiUtil = new ApiUtil();
-    protected final String baseUrl = apiUtil.getUrl("");
+    private ParkInfoRes mParkInfoRes;
 
     //String pAddr ="";
-    public static ParkInfoRes searchParkInfo() {
+    public ParkInfoRes searchParkInfo() {
         Log.d(TAG, "searchParkInfo>>Start>>>>>>>>000>>>>>>>>>>>>");
         new AsyncTask<Void, Void, String>() {
             @Override

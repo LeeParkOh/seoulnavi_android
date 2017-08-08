@@ -26,13 +26,15 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
     private LocationManager mLocationManager;
     private FloatingActionButton mFab;
     private GoogleMap mGMap;
-    private ParkInfoRes searchParkInfo = new ParkInfoRes();
-    private  ParkInfoRes mParkInfoRes = new ParkInfoRes();
+    private SearchParkInfo mSearchParkInfo;
+    private ParkInfoRes mParkInfoRes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate" );
         setContentView(R.layout.activity_map_main);
+
+        testSync();
 
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapFragment = (MapFragment)fragmentManager
@@ -95,14 +97,15 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         mGMap.addMarker(markerOptions2);
 
         Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>");
-        testSync();
+//        testSync();
         Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>2");
 
     }//onMapReady end
 
-    void testSync() {
+    private void testSync() {
         Log.d(TAG, "sync 맞냐??<<<>>>>>");
-        mParkInfoRes = SearchParkInfo.searchParkInfo();
+        mSearchParkInfo = new SearchParkInfo();
+        mParkInfoRes = mSearchParkInfo.searchParkInfo();
         Log.d(TAG, "sync 맞냐??<<<>>>>>end");
     }
 }
