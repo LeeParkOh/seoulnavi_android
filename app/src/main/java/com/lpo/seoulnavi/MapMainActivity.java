@@ -30,11 +30,12 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
     private ParkInfoRes mParkInfoRes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        testSync();
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate" );
         setContentView(R.layout.activity_map_main);
 
-        testSync();
+
 
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapFragment = (MapFragment)fragmentManager
@@ -83,6 +84,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         mGMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         mGMap.animateCamera(CameraUpdateFactory.zoomTo(10));
         // 마커에 표시될 정보
+
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(SEOUL);
         markerOptions.title("서울");
@@ -96,16 +98,32 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         mGMap.addMarker(markerOptions);
         mGMap.addMarker(markerOptions2);
 
+        /*
+        Log.d(TAG,"row.size()>>>"+mParkInfoRes.searchParkInfo.row.size());
+        int rowSize = mParkInfoRes.searchParkInfo.row.size();
+        for(int i=0; i<rowSize;i++){
+                                 //(LATITUDE, LONGITUDE)
+            LatLng Park = new LatLng(mParkInfoRes.searchParkInfo.row.get(i).latitude
+                                    , mParkInfoRes.searchParkInfo.row.get(i).longitude);
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(Park);
+            markerOptions.title(mParkInfoRes.searchParkInfo.row.get(i).pPark);
+            markerOptions.snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark);
+            mGMap.addMarker(markerOptions);
+
+        }
+*/
+
         Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>");
-//        testSync();
-        Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>2");
 
     }//onMapReady end
 
     private void testSync() {
         Log.d(TAG, "sync 맞냐??<<<>>>>>");
         mSearchParkInfo = new SearchParkInfo();
-        mParkInfoRes = mSearchParkInfo.searchParkInfo();
+        synchronized (this){
+            mParkInfoRes = mSearchParkInfo.searchParkInfo();
+        }
         Log.d(TAG, "sync 맞냐??<<<>>>>>end");
     }
 }
