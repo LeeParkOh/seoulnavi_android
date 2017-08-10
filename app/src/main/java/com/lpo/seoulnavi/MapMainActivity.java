@@ -30,7 +30,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
     private ParkInfoRes mParkInfoRes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        testSync();
+        callParkInfo();
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate" );
         setContentView(R.layout.activity_map_main);
@@ -77,7 +77,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         // 서울 위도, 경도
         LatLng SEOUL = new LatLng(37.56, 126.97);
                                 //(LATITUDE, LONGITUDE)
-        LatLng PARK70 = new LatLng(37.648420, 127.040929); //초안산근린공원
+        //LatLng PARK70 = new LatLng(37.648420, 127.040929); //초안산근린공원
 
         mGMap = map;
         mGMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -86,6 +86,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         // 마커에 표시될 정보
 
         MarkerOptions markerOptions = new MarkerOptions();
+        /*
         markerOptions.position(SEOUL);
         markerOptions.title("서울");
         markerOptions.snippet("한국의 수도");
@@ -97,33 +98,27 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
 
         mGMap.addMarker(markerOptions);
         mGMap.addMarker(markerOptions2);
+        */
 
-        /*
         Log.d(TAG,"row.size()>>>"+mParkInfoRes.searchParkInfo.row.size());
         int rowSize = mParkInfoRes.searchParkInfo.row.size();
-        for(int i=0; i<rowSize;i++){
-                                 //(LATITUDE, LONGITUDE)
+        for(int i=0; i<rowSize; i++){
+            //new LatLng(LATITUDE, LONGITUDE)
             LatLng Park = new LatLng(mParkInfoRes.searchParkInfo.row.get(i).latitude
                                     , mParkInfoRes.searchParkInfo.row.get(i).longitude);
-            MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(Park);
             markerOptions.title(mParkInfoRes.searchParkInfo.row.get(i).pPark);
             markerOptions.snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark);
             mGMap.addMarker(markerOptions);
-
         }
-*/
-
-        Log.d(TAG,"왔나 >>>>>>>>>>>>>>>>>>>>>>");
-
     }//onMapReady end
 
-    private void testSync() {
-        Log.d(TAG, "sync 맞냐??<<<>>>>>");
+    /**
+     * 공원정보 불러오기
+     */
+    private void callParkInfo() {
+        Log.d(TAG,"<<<<<<<callParkInfo Start>>>>>>");
         mSearchParkInfo = new SearchParkInfo();
-        synchronized (this){
-            mParkInfoRes = mSearchParkInfo.searchParkInfo();
-        }
-        Log.d(TAG, "sync 맞냐??<<<>>>>>end");
+        mParkInfoRes = mSearchParkInfo.searchParkInfo();
     }
 }
