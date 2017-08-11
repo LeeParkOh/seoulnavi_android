@@ -17,7 +17,9 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lpo.seoulnavi.controller.SearchCityAirInfo;
 import com.lpo.seoulnavi.controller.SearchParkInfo;
+import com.lpo.seoulnavi.net.response.CityAirInfoRes;
 import com.lpo.seoulnavi.net.response.ParkInfoRes;
 
 public class MapMainActivity extends AppCompatActivity implements OnMapReadyCallback{
@@ -26,20 +28,25 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
     private LocationManager mLocationManager;
     private FloatingActionButton mFab;
     private GoogleMap mGMap;
+
     private SearchParkInfo mSearchParkInfo;
     private ParkInfoRes mParkInfoRes;
+
+    private SearchCityAirInfo mSearchCityAirInfo;
+    private CityAirInfoRes mCityAirInfoRes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         callParkInfo();
+        callCityAirInfo();
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate" );
         setContentView(R.layout.activity_map_main);
 
-
-
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapFragment = (MapFragment)fragmentManager
                 .findFragmentById(R.id.map);
+
         // Google Map 객체가 준비되면 실행될 콜백 등록
         mapFragment.getMapAsync(this);
 
@@ -120,5 +127,14 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG,"<<<<<<<callParkInfo Start>>>>>>");
         mSearchParkInfo = new SearchParkInfo();
         mParkInfoRes = mSearchParkInfo.searchParkInfo();
+    }
+
+    /**
+     * 서울시 권역별 실시간 대기환경 현황 불러오기
+     */
+    private void callCityAirInfo() {
+        Log.d(TAG,"<<<<<<<callCityAirInfo Start>>>>>>");
+        mSearchCityAirInfo = new SearchCityAirInfo();
+        mCityAirInfoRes = mSearchCityAirInfo.searchCityAirInfo();
     }
 }

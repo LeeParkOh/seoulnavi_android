@@ -64,19 +64,19 @@ public class ParkInfoRes {
             @SerializedName("P_ADMINTEL")
             public String pAdminTel;
 
-            //X좌표(WGS84)
+            //Y좌표(WGS84)
             @SerializedName("LONGITUDE")
             public double longitude;
 
-            //Y좌표(WGS84)
+            //X좌표(WGS84)
             @SerializedName("LATITUDE")
             public double latitude;
 
-            //X좌표(GRS80TM)
+            //Y좌표(GRS80TM)
             @SerializedName("G_LONGITUDE")
             public double gLongitude;
 
-            //Y좌표(GRS80TM)
+            //X좌표(GRS80TM)
             @SerializedName("G_LATITUDE")
             public double gLatitude;
         }
