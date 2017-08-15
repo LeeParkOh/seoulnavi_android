@@ -15,7 +15,7 @@ public class LibraryInfoRes {
 	
     public static class SearchLibraryInfo {
 	   	 @SerializedName("list_total_count")
-	        public String listTotlaCount;
+	        public int listTotlaCount;
 	   	 
 	   	 @SerializedName("RESULT")
 	        public RESULTLIST resultList;
@@ -80,7 +80,7 @@ public class LibraryInfoRes {
 	            
 	            //면적
 	            @SerializedName("AR")
-	            public int ar;
+	            public double ar;
 	            
 	            //홈페이지주소
 	            @SerializedName("HMPG_CN")
