@@ -7,7 +7,119 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="150dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:id="@+id/filter1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="1"/>
+
+            <TextView
+                android:id="@+id/filter2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="2"/>
+
+            <TextView
+                android:id="@+id/filter3"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="3"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/filter4"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="4"/>
+
+            <TextView
+                android:id="@+id/filter5"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="5"/>
+
+            <TextView
+                android:id="@+id/filter6"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="6"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/filter7"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="7"/>
+
+            <TextView
+                android:id="@+id/filter8"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="8"/>
+
+            <TextView
+                android:id="@+id/filter9"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:background="#E6E6FA"
+                android:textColor="#000000"
+                android:text="9"/>
+        </RelativeLayout>
 
     </RelativeLayout>
 

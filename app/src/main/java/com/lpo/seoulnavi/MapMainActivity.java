@@ -1,6 +1,7 @@
 package com.lpo.seoulnavi;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
@@ -65,6 +66,8 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
     private SearchTraditionalMarketInfo mSearchTraditionalMarketInfo;
     private TraditionalMarketInfoRes mTraditionalMarketInfoRes;
 
+    private FilterDialog mFilterDialog;
+
     MarkerOptions mMarkerOptions;
 
     @Override
@@ -79,14 +82,15 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
 
         // Google Map 객체가 준비되면 실행될 콜백 등록
         mapFragment.getMapAsync(this);
-
         // Floating Button
         mFab = (FloatingActionButton)findViewById(R.id.btnFAB);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //callMarkerInfo(1);
-                Toast.makeText(MapMainActivity.this, "Filter Button", Toast.LENGTH_SHORT).show();
+
+                mFilterDialog = new FilterDialog(MapMainActivity.this, "0");
+                mFilterDialog.show();
             }
         });
 
