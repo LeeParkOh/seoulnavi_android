@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.lpo.seoulnavi.controller.SearchCityAirInfo;
 import com.lpo.seoulnavi.controller.SearchLibraryInfo;
@@ -34,6 +35,8 @@ import com.lpo.seoulnavi.net.response.PhysicalPlantInfoRes;
 import com.lpo.seoulnavi.net.response.SmokingZoneInfoRes;
 import com.lpo.seoulnavi.net.response.ToiletInfoRes;
 import com.lpo.seoulnavi.net.response.TraditionalMarketInfoRes;
+import com.lpo.seoulnavi.util.GeoPoint;
+import com.lpo.seoulnavi.util.GeoTrans;
 
 public class MapMainActivity extends AppCompatActivity implements OnMapReadyCallback{
 
@@ -122,13 +125,14 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         mGMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         mGMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-        callMarkerInfo(0);  //마커찍기
+        callMarkerInfo(1);  //마커찍기
     }//onMapReady end
     /**
      * 마커찍기
      */
     private void callMarkerInfo(int infoNumber){
         mMarkerOptions = new MarkerOptions();
+
         Log.d(TAG,"<<<<<<<infoNumber>>>>>>>");
         if(infoNumber == 0){//공원정보
             Log.d(TAG,"infoNumber>>>>>0");
@@ -140,25 +144,47 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
                 LatLng Park = new LatLng(mParkInfoRes.searchParkInfo.row.get(i).latitude
                         ,mParkInfoRes.searchParkInfo.row.get(i).longitude);
                 // 마커에 표시될 정보
-                mMarkerOptions.position(Park);
-                mMarkerOptions.title(mParkInfoRes.searchParkInfo.row.get(i).pPark);
-                mMarkerOptions.snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark);
-                mGMap.addMarker(mMarkerOptions);
+                Marker mMaker = mGMap.addMarker(new MarkerOptions().position(Park)
+                        .title(mParkInfoRes.searchParkInfo.row.get(i).pPark)
+                        .snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark)
+                );
+                //mMaker.remove();
+                //mMarkerOptions.position(Park);
+                //mMarkerOptions.title(mParkInfoRes.searchParkInfo.row.get(i).pPark);
+                //mMarkerOptions.snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark);
+                //mGMap.addMarker(mMarkerOptions);
             }
         }else if(infoNumber == 1){
+            //mGMap.addMarker(mMarkerOptions).remove();
+            mGMap.clear();
             callLibraryInfo();
             Log.d(TAG,"infoNumber>>>>>1");
             Log.d(TAG,"row.size()>>>"+mLibraryInfoRes.searchLibraryInfo.row.size());
             int rowSize = mLibraryInfoRes.searchLibraryInfo.row.size();
+            GeoTrans geoTrans = new GeoTrans();
+
+            //geoTrans.convert();
             for(int i=0; i<rowSize; i++){
+                GeoPoint geoPoint = new GeoPoint(Double.parseDouble(mLibraryInfoRes.searchLibraryInfo.row.get(i).latitude),
+                        Double.parseDouble(mLibraryInfoRes.searchLibraryInfo.row.get(i).longitude));
+                GeoPoint transPoint = geoTrans.convert(GeoTrans.GRS80,GeoTrans.GEO,geoPoint);
+                Log.d(TAG,">>>"+Double.parseDouble(mLibraryInfoRes.searchLibraryInfo.row.get(i).latitude));
+                Log.d(TAG,">>>"+Double.parseDouble(mLibraryInfoRes.searchLibraryInfo.row.get(i).longitude));
+                Log.d(TAG,"transpoint>y>>"+transPoint.getY());
+                Log.d(TAG,"transpoint>x>>"+transPoint.getX());
+
                 //new LatLng(LATITUDE, LONGITUDE)
-                LatLng Library = new LatLng(Double.parseDouble(mLibraryInfoRes.searchLibraryInfo.row.get(i).latitude)
-                        ,Double.parseDouble(mLibraryInfoRes.searchLibraryInfo.row.get(i).longitude));
+                LatLng Library = new LatLng(transPoint.getY(),transPoint.getX());
                 // 마커에 표시될 정보
-                mMarkerOptions.position(Library);
-                mMarkerOptions.title(mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
-                mMarkerOptions.snippet("한국의 "+mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
-                mGMap.addMarker(mMarkerOptions);
+                Marker mMaker = mGMap.addMarker(new MarkerOptions().position(Library)
+                        .title(mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName)
+                        .snippet("한국의 "+mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName)
+                );
+
+                //mMarkerOptions.position(Library);
+                //mMarkerOptions.title(mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
+                //mMarkerOptions.snippet("한국의 "+mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
+                //mGMap.addMarker(mMarkerOptions);
             }
         }
     }
