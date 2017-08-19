@@ -92,7 +92,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
             public void onClick(View v) {
                 //callMarkerInfo(1);
 
-                mFilterDialog = new FilterDialog(MapMainActivity.this, "0");
+                mFilterDialog = new FilterDialog(MapMainActivity.this, 0);
                 mFilterDialog.show();
             }
         });
