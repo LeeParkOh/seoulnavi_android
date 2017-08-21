@@ -54,11 +54,11 @@ public class TraditionalMarketInfoRes {
 
 	             //위도
 	             @SerializedName("LAT")
-	             public long latitude;
+	             public double latitude;
 
 	             //경도
 	             @SerializedName("LNG")
-	             public long longitude;
+	             public double longitude;
 	         }
 	    }
 }

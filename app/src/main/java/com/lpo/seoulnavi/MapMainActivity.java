@@ -125,7 +125,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         mGMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         mGMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-        callMarkerInfo(1);  //마커찍기
+        callMarkerInfo(2);  //마커찍기
     }//onMapReady end
     /**
      * 마커찍기
@@ -186,11 +186,36 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
                 //mMarkerOptions.snippet("한국의 "+mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
                 //mGMap.addMarker(mMarkerOptions);
             }
+        }else if(infoNumber == 2){
+            //mGMap.addMarker(mMarkerOptions).remove();
+            mGMap.clear();
+            callTraditionalMarketInfo();
+            Log.d(TAG,"infoNumber>>>>>1");
+            Log.d(TAG,"row.size()>>>"+mTraditionalMarketInfoRes.searchTraditionalMarketInfo.row.size());
+            int rowSize = mTraditionalMarketInfoRes.searchTraditionalMarketInfo.row.size();
+
+            for(int i=0; i<rowSize; i++){
+                //new LatLng(LATITUDE, LONGITUDE)
+                LatLng market = new LatLng(mTraditionalMarketInfoRes.searchTraditionalMarketInfo.row.get(i).latitude
+                                            ,mTraditionalMarketInfoRes.searchTraditionalMarketInfo.row.get(i).longitude
+                );
+                // 마커에 표시될 정보
+                Marker mMaker = mGMap.addMarker(new MarkerOptions().position(market)
+                        .title(mTraditionalMarketInfoRes.searchTraditionalMarketInfo.row.get(i).mName)
+                        .snippet("한국의 "+mTraditionalMarketInfoRes.searchTraditionalMarketInfo.row.get(i).mName)
+                );
+                //mMarkerOptions.position(Library);
+                //mMarkerOptions.title(mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
+                //mMarkerOptions.snippet("한국의 "+mLibraryInfoRes.searchLibraryInfo.row.get(i).fcltyName);
+                //mGMap.addMarker(mMarkerOptions);
+            }
+
         }
     }
 
     /**
      * 서울시 권역별 실시간 대기환경 현황 불러오기
+     * 좌표값 수동설정
      */
     private void callCityAirInfo() {
         Log.d(TAG,"<<<<<<<callCityAirInfo Start>>>>>>");
@@ -200,6 +225,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * 도서관정보
+     * 다음맵 좌표값임
      */
     private void callLibraryInfo() {
         Log.d(TAG,"<<<<<<<callLibraryInfo Start>>>>>>");
@@ -209,6 +235,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * 공원정보 불러오기
+     * 구글좌표값임
      */
     private void callParkInfo() {
         Log.d(TAG,"<<<<<<<callParkInfo Start>>>>>>");
@@ -248,6 +275,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * 공공화장실정보 불러오기
+     *  구글좌표있음(좌표가 4000여개)
      */
     private void callToiletInfo() {
         Log.d(TAG,"<<<<<<<callToiletInfo Start>>>>>>");
@@ -257,6 +285,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * 전통시장정보 불러오기
+     * 구글좌표있음
      */
     private void callTraditionalMarketInfo() {
         Log.d(TAG,"<<<<<<<callTraditionalMarketInfo Start>>>>>>");

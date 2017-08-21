@@ -63,7 +63,7 @@ public interface ContentService {
      * 공공화장실정보
      * @return
      */
-    @GET("/476b6d4a4c74776f3131394d78654457/json/GeoInfoPublicToilet/1/1000")
+    @GET("/476b6d4a4c74776f3131394d78654457/json/SearchPublicToiletPOIService/1/1000")
     Call<ToiletInfoRes> getPostToiletInfo();
 
     /**
