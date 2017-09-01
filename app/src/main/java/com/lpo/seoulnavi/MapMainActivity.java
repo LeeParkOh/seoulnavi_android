@@ -125,7 +125,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         mGMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         mGMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-        callMarkerInfo(2);  //마커찍기
+        //callMarkerInfo(2);  //마커찍기
     }//onMapReady end
     /**
      * 마커찍기
@@ -136,6 +136,7 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG,"<<<<<<<infoNumber>>>>>>>");
         if(infoNumber == 0){//공원정보
             Log.d(TAG,"infoNumber>>>>>0");
+            /*
             callParkInfo();
             Log.d(TAG,"row.size()>>>"+mParkInfoRes.searchParkInfo.row.size());
             int rowSize = mParkInfoRes.searchParkInfo.row.size();
@@ -148,12 +149,8 @@ public class MapMainActivity extends AppCompatActivity implements OnMapReadyCall
                         .title(mParkInfoRes.searchParkInfo.row.get(i).pPark)
                         .snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark)
                 );
-                //mMaker.remove();
-                //mMarkerOptions.position(Park);
-                //mMarkerOptions.title(mParkInfoRes.searchParkInfo.row.get(i).pPark);
-                //mMarkerOptions.snippet("한국의 "+mParkInfoRes.searchParkInfo.row.get(i).pPark);
-                //mGMap.addMarker(mMarkerOptions);
-            }
+
+            }*/
         }else if(infoNumber == 1){
             //mGMap.addMarker(mMarkerOptions).remove();
             mGMap.clear();
